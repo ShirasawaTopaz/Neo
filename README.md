@@ -10,15 +10,25 @@ git clone git@github.com:Shirasawa-CN/Neo.git
 
 ## Build
 ### linux
-```
-cd /thirdparty/Scintilla/win32
-make 
-cd ../qt
-qmake6
-make
 
-cd ../../../
-cmake
+<b>DO NOT USE build.sh</b>
+
+```
+cd thirdparty/Lua
+make
+cd ../Scintilla/gtk
+make
+cd ../qt/ScintillaEdit
+mkdir build
+python WidgetGen.py
+cd build
+qmake6 ..
+make
+cd ../../../../../
+mkdir build
+cd build
+cmake ..
+make
 ```
 
 ### windows

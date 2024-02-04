@@ -89,11 +89,11 @@ endif(WIN32)
 
 if(UNIX)
     message("Build on UNIX-LIKE")
-    set(SCINTILLA_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/Scintilla/bin/libScintilla.so)
-    set(SCINTILLA_LIBRARY_NAME libScintilla.so)
+    set(SCINTILLA_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/Scintilla/bin/libscintilla.so)
+    set(SCINTILLA_LIBRARY_NAME libscintilla.so)
 
-    set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/Scintilla/bin/libScintillaEdit5.so)
-    set(SCINTILLA_EDIT_NAME libScintillaEdit5.so)
+    set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/Scintilla/qt/bin/libScintillaEdit.so)
+    set(SCINTILLA_EDIT_NAME libScintillaEdit.so)
 endif(UNIX)
 
 target_link_libraries(Neo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets PUBLIC ${LUA_LIBRARY} ${SCINTILLA_LIBRARY} ${SCINTILLA_EDIT})
