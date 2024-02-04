@@ -10,6 +10,15 @@
 /out
 /.vs
 /thirdparty/QScintilla/src/.qmake.stash
+/thirdparty/Lua/src/*.o
+/thirdparty/Lua/src/*.a
+/thirdparty/Lua/src/lua
+/thirdparty/Lua/src/luac
+/thirdparty/Scintilla/gtk/*.o
+/thirdparty/Scintilla/bin/scintilla.a
+/thirdparty/Scintilla/bin/libscintilla.so
+/thirdparty/Scintilla/qt/bin
+/thirdparty/Scintilla/qt/ScintillaEdit/build
 
 *~
 *.autosave
