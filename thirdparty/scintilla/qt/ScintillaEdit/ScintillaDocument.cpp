@@ -85,7 +85,7 @@ void WatcherHelper::NotifyStyleNeeded(Document *, void *, Sci::Position endPos) 
 }
 
 void WatcherHelper::NotifyErrorOccurred(Document *, void *, Status status) {
-    emit owner->error_occurred(static_cast<int>(status));
+     owner->error_occurred(static_cast<int>(status));
 }
 
 ScintillaDocument::ScintillaDocument(QObject *parent, void *pdoc_) :

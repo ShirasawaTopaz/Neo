@@ -10,6 +10,7 @@
 #include <QColor>
 
 #include <ScintillaEdit.h>
+#include <ScintillaEditBase.h>
 #include <Scintilla.h>
 #include <ScintillaMessages.h>
 #include <ScintillaStructures.h>
@@ -47,10 +48,13 @@ struct EditorSetting{
 };
 
 class EditorBase : public ScintillaEdit{
+    Q_OBJECT
 private:
     QString *title;
     long long *id;
-    
+
+    sptr_t *line_count;
+
     /// status
     bool *is_saved;
     bool *is_focused;
@@ -58,8 +62,12 @@ private:
     //渲染情况,如果修改后需重新渲染
     bool *is_highlighted;
 
+signals:
+    // emit
+    void linesChanged();
+
 public:
-    EditorBase(QString title, long long id);
+    explicit EditorBase(QString title, long long id);
 
     bool Neo_highlight();
 
@@ -69,8 +77,8 @@ public:
 
     ~EditorBase() override;
 
-private slots:
-    void NeoAutoChangeMarginWidth();
+public slots:
+    void AutoChangeMarginWidth();
 };
 
 #endif

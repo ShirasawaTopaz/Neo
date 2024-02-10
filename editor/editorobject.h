@@ -32,6 +32,7 @@ public:
     inline void setEditor();
     inline void setEditor(EditorSetting setting);
 
+private slots:
     inline void resetNumberMargin();
 
     ~EditorObject();

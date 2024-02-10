@@ -129,6 +129,10 @@ endif(WIN32)
 if(UNIX)
 add_custom_command(TARGET Neo POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}
+)
+add_custom_command(TARGET Neo POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
     ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}.5
 )
 add_custom_command(TARGET Neo POST_BUILD

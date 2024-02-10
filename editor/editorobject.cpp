@@ -17,7 +17,7 @@ EditorObject::EditorObject(QString path, long long id){
     setEditor();
 
     // connect
-    //connect(editor, &EditorBase::)
+    connect(editor, SIGNAL(editor->linesChanged()), this, SLOT(this->resetNumberMargin()));
 }
 EditorObject::EditorObject(){
 
