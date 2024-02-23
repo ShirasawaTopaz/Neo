@@ -6,10 +6,11 @@
 #include <QString>
 #include <QFile>
 #include <QTextStream>
+#include <QEvent>
 
 #include "editorbase.h"
 
-class EditorObject : public QObject
+class EditorObject : public QWidget
 {
 private:
     EditorBase *editor;
@@ -18,8 +19,13 @@ private:
     QFile *file;
     QTextStream *stream;
 
-    ///
-    QCompleter *completer;
+    inline void resetNumberMargin();
+
+protected:
+    /// 重写按下键盘事件
+    void keyPressEvent(QKeyEvent *event);
+    /// 重写释放键盘事件
+    void keyReleaseEvent(QKeyEvent *event);
 
 public:
     EditorObject(QString path, long long id);
@@ -31,9 +37,6 @@ public:
 
     inline void setEditor();
     inline void setEditor(EditorSetting setting);
-
-private slots:
-    inline void resetNumberMargin();
 
     ~EditorObject();
 };

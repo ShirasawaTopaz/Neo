@@ -62,12 +62,8 @@ private:
     //渲染情况,如果修改后需重新渲染
     bool *is_highlighted;
 
-signals:
-    // emit
-    void linesChanged();
-
 public:
-    explicit EditorBase(QString title, long long id);
+    EditorBase(QString title, long long id);
 
     bool Neo_highlight();
 
@@ -76,9 +72,6 @@ public:
     }
 
     ~EditorBase() override;
-
-public slots:
-    void AutoChangeMarginWidth();
 };
 
 #endif
