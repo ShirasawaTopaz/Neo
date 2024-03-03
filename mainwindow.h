@@ -5,18 +5,25 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
+#include <QWebEngineView>
 
-#include "editor/editorobject.h"
+// 引入editor组件
 #include "editor/editormanager.h"
+
+// 引入UI的组件
+#include "ui/setting.h"
+#include "ui/aboutneo.h"
 
 class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
 private:
+  EditorManager* editorManager = new EditorManager();
+  QTabWidget* tabWidget;
+  QWebEngineView webview;
   // MenuBar
   QMenuBar* menuBar;
-  QTabWidget* tabWidget;
 
   // 定义QMenu
   QMenu* fileMenu = new QMenu(tr("File")+"(&F)");
@@ -37,6 +44,7 @@ private:
   QAction* closeFileAction = new QAction(tr("Close File"));
   QAction* closeFolderAction = new QAction(tr("Close Folder"));
   QAction* closeAllFileAction = new QAction(tr("Close All Files"));
+  QAction* openSetting = new QAction(tr("Setting"));
   QAction* exitAction = new QAction(tr("Exit"));
 
   // Edit
@@ -52,17 +60,21 @@ private:
   QAction* findPreviousAction = new QAction(tr("Find Previous"));
   QAction* replaceAction = new QAction(tr("Replace"));
 
-
   // Help
   QAction* documentAction = new QAction(tr("Document"));
   QAction* websiteAction = new QAction(tr("Website"));
   QAction* feedBackAction = new QAction(tr("Feedback"));
   QAction* aboutAction = new QAction(tr("About"));
 
-  EditorManager* editorManager = new EditorManager();
 
 public:
   MainWindow(QWidget* parent = nullptr);
   ~MainWindow();
+
+private slots:
+  // 定义QAction功能
+  void showSetting();
+  void showAboutNeo();
+  void showWebsite();
 };
 #endif // MAINWINDOW_H

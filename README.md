@@ -13,12 +13,7 @@ git clone git@github.com:Shirasawa-CN/Neo.git
 ```
 cd /thirdparty/scintilla/qt/ScintillaEdit
 python3 ./WidgetGEn.py
-make
-cd ../../gtk
-make
-
-cd ../../../
-cd lua
+qmake
 make
 
 cd ../../../
@@ -27,21 +22,23 @@ cmake
 ```
 
 ### windows
-msys2
-```
-pacman -S mingw-w64-x86_64-toolchain mingw-w64-x86_64-qt6-base
-```
-
 powershell
 ```
-cd /thirdparty/scintilla/win32
-mingw32-make 
 cd ../qt/ScintillaEdit
-mingw32-make
-
-cd ../../../lua
-mingw32-make
-
-cd ../../../
-cmake
+qmake6
 ```
+
+REALEASE
+
+```
+nmake
+```
+
+DEBUG
+
+```
+nmake /F Makefile.Debug
+```
+
+
+

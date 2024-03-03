@@ -4,10 +4,9 @@
 #define EDITORBASE_H
 
 #include <QString>
-#include <QTextEdit>
-#include <QCompleter>
 #include <QFont>
 #include <QColor>
+#include <QKeyEvent>
 
 #include <ScintillaEdit.h>
 #include <ScintillaEditBase.h>
@@ -18,7 +17,6 @@
 #include <ScintillaTypes.h>
 #include <ScintillaDocument.h>
 
-#include "editorhighlighter.h"
 #include "programlanguage.h"
 
 enum Encode
@@ -61,6 +59,9 @@ private:
     bool *is_modified;
     //渲染情况,如果修改后需重新渲染
     bool *is_highlighted;
+
+signals:
+    void resetNumberMarginSignal();
 
 public:
     EditorBase(QString title, long long id);

@@ -8,14 +8,6 @@
 #include <memory>
 #include <string>
 
-// 引入lua的头文件
-// 由于qt不允许引入hpp头文件，故需要用 extern "C" 进行声明
-extern "C"{
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
-};
-
 struct PlugInfo
 {
     std::string name;
@@ -28,8 +20,6 @@ struct PlugInfo
 class Container
 {
 private:
-	//初始化lua_State
-    lua_State* L = luaL_newstate();
     std::unique_ptr<PlugInfo> info;
 public:
     Container(const std::string& file);

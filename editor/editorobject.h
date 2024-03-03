@@ -7,11 +7,13 @@
 #include <QFile>
 #include <QTextStream>
 #include <QEvent>
+#include <QKeyEvent>
 
 #include "editorbase.h"
 
 class EditorObject : public QWidget
 {
+    Q_OBJECT
 private:
     EditorBase *editor;
     QString *data;
@@ -19,13 +21,8 @@ private:
     QFile *file;
     QTextStream *stream;
 
+private slots:
     inline void resetNumberMargin();
-
-protected:
-    /// 重写按下键盘事件
-    void keyPressEvent(QKeyEvent *event);
-    /// 重写释放键盘事件
-    void keyReleaseEvent(QKeyEvent *event);
 
 public:
     EditorObject(QString path, long long id);
@@ -35,8 +32,8 @@ public:
     void getData();
     EditorBase* getEditor();
 
-    inline void setEditor();
-    inline void setEditor(EditorSetting setting);
+    void setEditor();
+    void setEditor(EditorSetting setting);
 
     ~EditorObject();
 };

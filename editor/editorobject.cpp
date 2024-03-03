@@ -24,6 +24,7 @@ EditorObject::EditorObject()
     editor = new EditorBase("untitled", 0);
     // 默认设置
     setEditor();
+    connect(this->editor,&EditorBase::resetNumberMarginSignal,this,&EditorObject::resetNumberMargin);
 }
 
 void EditorObject::save()
@@ -57,31 +58,6 @@ void EditorObject::resetNumberMargin()
 {
     // 设置行号栏大小
     editor->setMarginWidthN(1, editor->textWidth(SC_MARGIN_NUMBER, (QString::number(editor->getTotalLine()) + "00000").toUtf8().constData()));
-}
-
-void EditorObject::keyPressEvent(QKeyEvent *event)
-{
-    editor->setMarginWidthN(1, editor->textWidth(SC_MARGIN_NUMBER, (QString::number(editor->getTotalLine()) + "00000").toUtf8().constData()));
-    switch (event->key())
-    {
-    case Qt::Key_Enter || Qt::Key_Return:
-        resetNumberMargin();
-        break;
-    default:
-        break;
-    }
-}
-
-void EditorObject::keyReleaseEvent(QKeyEvent *event)
-{
-    switch (event->key())
-    {
-    case Qt::Key_Enter || Qt::Key_Return:
-        resetNumberMargin();
-        break;
-    default:
-        break;
-    }
 }
 
 EditorObject::~EditorObject() {}

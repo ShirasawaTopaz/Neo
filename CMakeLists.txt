@@ -10,12 +10,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS WebEngineWidgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lua/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/win32)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/gtk)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/qt/ScintillaEdit)
@@ -36,8 +34,16 @@ set(EDITOR_SOURCES
         editor/programlanguage.h
         editor/editormanager.h
         editor/editormanager.cpp
-        editor/editorhighlighter.cpp
-        editor/editorhighlighter.h
+)
+
+set(UI_SOURCES
+        ui/setting.h
+        ui/setting.cpp
+        ui/setting.ui
+
+        ui/aboutneo.h
+        ui/aboutneo.cpp
+        ui/aboutneo.ui
 )
 
 set(SERVICE_SOURCES
@@ -52,12 +58,16 @@ set(PROJECT_SOURCES
         ${EDITOR_SOURCES}
         ${SERVICE_SOURCES}
         ${PLUGIN_SOURCES}
+        ${UI_SOURCES}
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Neo
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ui/setting.h ui/setting.cpp ui/setting.ui
+        ui/aboutneo.h ui/aboutneo.cpp ui/aboutneo.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Neo APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -77,12 +87,10 @@ else()
     endif()
 endif()
 
-set(LUA_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lua/src/liblua.a)
-
 if(WIN32)
     message("Build on Windows")
-    set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/bin/ScintillaEdit.dll)
-    set(SCINTILLA_EDIT_NAME ScintillaEdit.dll)
+    set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/bin/ScintillaEdit5.lib)
+    set(SCINTILLA_EDIT_NAME ScintillaEdit5.lib)
 endif(WIN32)
 
 if(UNIX)
@@ -92,7 +100,7 @@ if(UNIX)
     set(SCINTILLA_EDIT_NAME libScintillaEdit.so)
 endif(UNIX)
 
-target_link_libraries(Neo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets PUBLIC ${LUA_LIBRARY} ${SCINTILLA_LIBRARY} ${SCINTILLA_EDIT})
+target_link_libraries(Neo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets PUBLIC ${SCINTILLA_EDIT})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

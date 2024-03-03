@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Setting</class>
+ <widget class="QWidget" name="Setting">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>720</width>
+    <height>440</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>720</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTreeWidget" name="treeWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>41</y>
+     <width>151</width>
+     <height>391</height>
+    </rect>
+   </property>
+   <property name="headerHidden">
+    <bool>true</bool>
+   </property>
+   <column>
+    <property name="text">
+     <string>Setting</string>
+    </property>
+   </column>
+   <item>
+    <property name="text">
+     <string>Editor</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Base</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Complete</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Font</string>
+     </property>
+    </item>
+   </item>
+   <item>
+    <property name="text">
+     <string>Analyse</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Clangd</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Rust Analyzer</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Valgrind</string>
+     </property>
+    </item>
+   </item>
+  </widget>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>10</y>
+     <width>541</width>
+     <height>421</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>151</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="placeholderText">
+    <string>Filter</string>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

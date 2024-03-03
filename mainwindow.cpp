@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget* parent)
   fileMenu->addSeparator();
   fileMenu->addActions({closeFileAction, closeAllFileAction, closeFolderAction});
   fileMenu->addSeparator();
+  fileMenu->addActions({openSetting});
+  fileMenu->addSeparator();
   fileMenu->addActions({exitAction});
 
   // 设置editMenu下拉菜单布局
@@ -52,6 +54,26 @@ MainWindow::MainWindow(QWidget* parent)
 
   // 添加tab
   tabWidget->addTab(editorManager->getEditor(0)->getEditor(),"untitled");
+
+  // 添加Menu功能
+  connect(this->openSetting,&QAction::triggered,this,&MainWindow::showSetting);
+  connect(this->aboutAction,&QAction::triggered,this,&MainWindow::showAboutNeo);
+  connect(this->websiteAction,&QAction::triggered,this,&MainWindow::showWebsite);
+}
+
+void MainWindow::showSetting(){
+    Setting *setting = new Setting();
+    setting->show();
+}
+
+void MainWindow::showAboutNeo(){
+    AboutNeo *aboutNeo = new AboutNeo();
+    aboutNeo->show();
+}
+
+void MainWindow::showWebsite(){
+    webview.load(QUrl("https://github.com/ShirasawaTopaz/Neo"));
+    webview.show();
 }
 
 MainWindow::~MainWindow() {}

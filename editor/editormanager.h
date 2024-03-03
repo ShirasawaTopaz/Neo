@@ -11,6 +11,8 @@ private:
 public:
     EditorManager();
 
+    void newEditor();
+
     EditorObject* getEditor(long long index);
 
     ~EditorManager();
