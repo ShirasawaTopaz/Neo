@@ -76,6 +76,26 @@
      </property>
     </item>
    </item>
+   <item>
+    <property name="text">
+     <string>Plugin</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>Installed</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Install Plugin</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Plugin Setting</string>
+     </property>
+    </item>
+   </item>
   </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
