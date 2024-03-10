@@ -85,11 +85,11 @@ void WatcherHelper::NotifyStyleNeeded(Document *, void *, Sci::Position endPos) 
 }
 
 void WatcherHelper::NotifyErrorOccurred(Document *, void *, Status status) {
-     owner->error_occurred(static_cast<int>(status));
+    emit owner->error_occurred(static_cast<int>(status));
 }
 
 ScintillaDocument::ScintillaDocument(QObject *parent, void *pdoc_) :
-    QObject(parent), pdoc(pdoc_), docWatcher(nullptr) {
+    QObject(parent), pdoc(static_cast<Scintilla::IDocumentEditable *>(pdoc_)), docWatcher(nullptr) {
     if (!pdoc) {
 	pdoc = new Document(DocumentOption::Default);
     }
@@ -153,8 +153,8 @@ bool ScintillaDocument::is_collecting_undo() {
     return (static_cast<Document *>(pdoc))->IsCollectingUndo();
 }
 
-void ScintillaDocument::begin_undo_action() {
-    (static_cast<Document *>(pdoc))->BeginUndoAction();
+void ScintillaDocument::begin_undo_action(bool coalesceWithPrior) {
+    (static_cast<Document *>(pdoc))->BeginUndoAction(coalesceWithPrior);
 }
 
 void ScintillaDocument::end_undo_action() {

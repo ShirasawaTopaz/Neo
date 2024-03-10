@@ -73,6 +73,7 @@ void MainWindow::showAboutNeo(){
 
 void MainWindow::showWebsite(){
     webview.load(QUrl("https://github.com/ShirasawaTopaz/Neo"));
+    webview.setWindowTitle("Website");
     webview.show();
 }
 

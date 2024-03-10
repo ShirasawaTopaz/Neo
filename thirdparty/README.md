@@ -2,6 +2,6 @@
 
 |  Package  | Version | LICENSE |
 | :-------: | :-----: | :-----: |
-|    Lua    |  5.4.6  |   MIT   |
-| Scintilla |  5.4.1  |   MIT   |
+| Scintilla |  5.4.3  |   MIT   |
+|  Lexilla  |  5.3.1  |   MIT   |
 

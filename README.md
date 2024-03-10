@@ -16,29 +16,11 @@ python3 ./WidgetGEn.py
 qmake
 make
 
+cd ../../../lexilla/src
+make
+
 cd ../../../
 cmake
 
 ```
-
-### windows
-powershell
-```
-cd ../qt/ScintillaEdit
-qmake6
-```
-
-REALEASE
-
-```
-nmake
-```
-
-DEBUG
-
-```
-nmake /F Makefile.Debug
-```
-
-
 

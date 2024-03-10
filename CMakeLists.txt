@@ -20,6 +20,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/qt/Scintill
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/qt/ScintillaEditBase)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/call)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/lexers)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/lexlib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/access)
+
 set(PLUGIN_SOURCES
         plugin/pluginloader.h
         plugin/pluginloader.cpp
@@ -91,13 +98,18 @@ if(WIN32)
     message("Build on Windows")
     set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/bin/ScintillaEdit5.lib)
     set(SCINTILLA_EDIT_NAME ScintillaEdit5.lib)
+
+    set(LEXILLA ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/bin/lexilla.dll)
+    set(LEXILLA_NAME lexilla.dll)
 endif(WIN32)
 
 if(UNIX)
     message("Build on UNIX-LIKE")
-
     set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/bin/libScintillaEdit.so)
     set(SCINTILLA_EDIT_NAME libScintillaEdit.so)
+
+    set(LEXILLA ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/bin/liblexilla.so)
+    set(LEXILLA_NAME liblexilla.so)
 endif(UNIX)
 
 target_link_libraries(Neo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets PUBLIC ${SCINTILLA_EDIT})
@@ -127,28 +139,12 @@ if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Neo)
 endif()
 
-if(WIN32)
 add_custom_command(TARGET Neo POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
     ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}
 )
-endif(WIN32)
 
-if(UNIX)
 add_custom_command(TARGET Neo POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}
+    ${LEXILLA} $<TARGET_FILE_DIR:Neo>/${LEXILLA_NAME}
 )
-add_custom_command(TARGET Neo POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}.5
-)
-add_custom_command(TARGET Neo POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}.5.4
-)
-add_custom_command(TARGET Neo POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    ${SCINTILLA_EDIT} $<TARGET_FILE_DIR:Neo>/${SCINTILLA_EDIT_NAME}5.4.1
-)
-endif(UNIX)
