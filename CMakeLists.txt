@@ -74,6 +74,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         ui/setting.h ui/setting.cpp ui/setting.ui
         ui/aboutneo.h ui/aboutneo.cpp ui/aboutneo.ui
+        ui/settingwidget/settingeditorbase.h ui/settingwidget/settingeditorbase.cpp ui/settingwidget/settingeditorbase.ui
+
+
 
     )
 # Define target properties for Android with Qt 6 as:
@@ -96,8 +99,8 @@ endif()
 
 if(WIN32)
     message("Build on Windows")
-    set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/bin/ScintillaEdit5.lib)
-    set(SCINTILLA_EDIT_NAME ScintillaEdit5.lib)
+    set(SCINTILLA_EDIT ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/scintilla/bin/ScintillaEdit5.dll)
+    set(SCINTILLA_EDIT_NAME ScintillaEdit5.dll)
 
     set(LEXILLA ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/lexilla/bin/lexilla.dll)
     set(LEXILLA_NAME lexilla.dll)
@@ -112,7 +115,7 @@ if(UNIX)
     set(LEXILLA_NAME liblexilla.so)
 endif(UNIX)
 
-target_link_libraries(Neo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets PUBLIC ${SCINTILLA_EDIT})
+target_link_libraries(Neo PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::WebEngineWidgets PUBLIC ${SCINTILLA_EDIT} ${LEXILLA})
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

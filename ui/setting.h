@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <map>
 
+#include "settingwidget/settingeditorbase.h"
+
 namespace Ui {
 class Setting;
 }
@@ -25,19 +27,19 @@ public:
 private:
     Ui::Setting *ui;
 
+    int *temp;
+
     // QTreeWidget Map
-    std::map<QString,std::function<void()>> SettingMap = {
-        {"Base",[](){qDebug()<<"Success";}},
-        {"Complete",[](){}},
-        {"Font",[](){}},
-        {"Clangd",[](){}},
-        {"Complete",[](){}},
-        {"Rust Analyzer",[](){}},
-        {"Valgrind",[](){}},
-        {"Installed",[](){}},
-        {"Install Plugin",[](){}},
-        {"Plugin Setting",[](){}},
+    enum SettingMapEnum{
+        SETTING_EDITOR_BASE = 0,
+        SETTING_EDITOR_COMPLETE = 1,
     };
+    std::map<QString,int> SettingMap = {
+        {"Base",SettingMapEnum::SETTING_EDITOR_BASE},
+
+    };
+
+    void callEditorBase();
 };
 
 #endif // SETTING_H
